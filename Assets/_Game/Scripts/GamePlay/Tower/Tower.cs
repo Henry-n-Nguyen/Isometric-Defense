@@ -105,11 +105,12 @@ public class Tower : MonoBehaviour
     // STATUS EFFECT
     public void ApplyEffectsTo(Enemy enemy)
     {
-        if (applySlow)
+        if (applySlow && enemy.CanSlow)
         {
             enemy.ApplyStatusEffect(new StatusEffect_Slow(1, 0.5f, enemy));
         }
-        if (applyBurn)
+
+        if (applyBurn && enemy.CanBurn)
         {
             enemy.ApplyStatusEffect(new StatusEffect_Burn(1, 1, 0.5f, enemy));
         }

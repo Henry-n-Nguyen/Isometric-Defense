@@ -21,7 +21,14 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float speed = 10f;
     [SerializeField] private int moneyDrop = 10;
 
-    // Status Variables
+    [Header("Resistants")]
+    [SerializeField] private bool slowResistant;
+    public bool CanSlow => !slowResistant;
+
+    [SerializeField] private bool burnResistant;
+    public bool CanBurn => !burnResistant;
+
+    [Header("Status Variables")]
     [SerializeField] private List<StatusEffect> activeEffects = new List<StatusEffect>();
 
     // Move variables

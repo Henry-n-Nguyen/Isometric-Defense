@@ -669,14 +669,17 @@ MonoBehaviour:
   - enemies:
     - {fileID: 3715576317262020384, guid: 2cde6a1a7c517a341a41115122c0971d, type: 3}
     - {fileID: 3715576317262020384, guid: 2cde6a1a7c517a341a41115122c0971d, type: 3}
-    delayTime: 8
-  - enemies:
     - {fileID: 3715576317262020384, guid: 2cde6a1a7c517a341a41115122c0971d, type: 3}
     delayTime: 8
   - enemies:
-    - {fileID: 3715576317262020384, guid: 2cde6a1a7c517a341a41115122c0971d, type: 3}
-    - {fileID: 3715576317262020384, guid: 2cde6a1a7c517a341a41115122c0971d, type: 3}
-    - {fileID: 3715576317262020384, guid: 2cde6a1a7c517a341a41115122c0971d, type: 3}
+    - {fileID: 3715576317262020384, guid: 5eac4de94f6c83a4ea196c590c329f9b, type: 3}
+    - {fileID: 3715576317262020384, guid: 5eac4de94f6c83a4ea196c590c329f9b, type: 3}
+    - {fileID: 3715576317262020384, guid: 5eac4de94f6c83a4ea196c590c329f9b, type: 3}
+    delayTime: 8
+  - enemies:
+    - {fileID: 3715576317262020384, guid: db9a760a9ce304847ba54a7abc01c343, type: 3}
+    - {fileID: 3715576317262020384, guid: db9a760a9ce304847ba54a7abc01c343, type: 3}
+    - {fileID: 3715576317262020384, guid: db9a760a9ce304847ba54a7abc01c343, type: 3}
     delayTime: 8
   enemyNum: 0
   spawnPoint: {fileID: 2446762790670451816}
