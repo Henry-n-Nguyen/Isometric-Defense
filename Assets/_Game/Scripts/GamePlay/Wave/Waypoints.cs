@@ -1,15 +1,30 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Waypoints : MonoBehaviour
 {
-    public static Transform[] points;
+    [Header("Transform")]
+    [SerializeField] private List<Transform> wayPoints = new List<Transform>();
 
-    void Awake()
+    public static List<Transform[]> points = new List<Transform[]>();
+
+    private void Awake()
     {
-        points = new Transform[transform.childCount];
-        for (int i = 0; i < points.Length; i++)
+        for (int i = 0; i < wayPoints.Count; i++)
         {
-            points[i] = transform.GetChild(i);
+            if (wayPoints[i].childCount == 0)
+            {
+                continue;
+            }
+
+            Transform[] tmpPoints = new Transform[wayPoints[i].childCount];
+
+            for (int j = 0; j < tmpPoints.Length; j++)
+            {
+                tmpPoints[j] = wayPoints[i].GetChild(j);
+            }
+
+            points.Add(tmpPoints);
         }
     }
 }

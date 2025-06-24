@@ -3,10 +3,12 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private Transform target;
+    private Tower sourceTower;
 
     public float speed = 5f;
+    private int damage = 1;
 
-    void Update()
+    private void Update()
     {
         if (target == null)
         {
@@ -26,14 +28,29 @@ public class Bullet : MonoBehaviour
         transform.Translate(dir.normalized * distanceThisFrame, Space.World);
     }
 
+    public void Init(int damage, Tower sourceTower)
+    {
+        this.damage = damage;
+        this.sourceTower = sourceTower;
+    }
+
     public void Seek(Transform _target)
     {
         target = _target;
+        
     }
 
     private void HitTarget()
     {
-        target.GetComponent<Enemy>().Hit();
+        Enemy enemy = target.GetComponent<Enemy>();
+
+        if (enemy != null)
+        {
+            enemy.Hit(damage);
+
+            sourceTower.ApplyEffectsTo(enemy);
+        }
+
         Destroy(gameObject);
     }
 }

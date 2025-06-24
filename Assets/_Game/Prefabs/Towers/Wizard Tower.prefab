@@ -182,8 +182,8 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.8181818}
-    oldSize: {x: 0.6, y: 0.4888889}
+    pivot: {x: 0.5, y: 0.65}
+    oldSize: {x: 0.675, y: 0.55}
     newSize: {x: 0.95, y: 0.97}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -208,12 +208,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc3fef63327694b449cc0cdf98f05909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firePoint: {fileID: 4375417884782005435}
+  partToRotate: {fileID: 2266782925383051092}
+  damage: 1
+  fireRate: 0.5
+  useLaser: 0
+  lineRenderer: {fileID: 0}
+  bulletPrefab: {fileID: 1250241963751108756, guid: b5f39937364bf294fa8d2f19be28bb8b, type: 3}
+  applySlow: 1
+  applyBurn: 0
   targetList: []
   target: {fileID: 0}
-  partToRotate: {fileID: 2266782925383051092}
-  fireRate: 0.5
-  bulletPrefab: {fileID: 1250241963751108756, guid: b5f39937364bf294fa8d2f19be28bb8b, type: 3}
-  firePoint: {fileID: 4375417884782005435}
 --- !u!1 &7307232630904854894
 GameObject:
   m_ObjectHideFlags: 0

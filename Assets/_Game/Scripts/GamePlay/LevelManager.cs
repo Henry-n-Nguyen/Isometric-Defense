@@ -14,18 +14,28 @@ public class LevelManager : Singleton<LevelManager>
     public int Money;
     public int MaxMoney;
     public int Profit;
-
     public int Lives;
+    
+    public bool IsWinLevel;
 
     private float timer;
 
-    private void Start()
+    private void Awake()
     {
+        IsWinLevel = false;
+
         Money = PlayerStats.StartMoney;
         MaxMoney = PlayerStats.StartMaxReach;
         Profit = PlayerStats.StartProfit;
 
         Lives = PlayerStats.StartLives;
+
+        WaveManager.Ins.OnInvasionEnd += OnLevelEnd;
+    }
+
+    private void Start()
+    {
+        UIManager.Ins.OpenUI<UI_Ingame>();
     }
 
     private void FixedUpdate()
@@ -52,5 +62,23 @@ public class LevelManager : Singleton<LevelManager>
     {
         Lives -= amount;
         OnEnemyInvaded?.Invoke();
+
+        if (Lives <= 0)
+        {
+            OnLevelEnd();
+        }
+    }
+
+    public void OnLevelEnd()
+    {
+        WaveManager.Ins.OnInvasionEnd -= OnLevelEnd;
+
+        if (IsWinLevel)
+        {
+            Debug.Log("You Win :))))");
+            return;
+        }
+
+        Debug.Log("You Lose!!!");
     }
 }

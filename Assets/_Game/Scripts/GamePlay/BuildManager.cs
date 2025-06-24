@@ -16,8 +16,6 @@ public class BuildManager : Singleton<BuildManager>
     private void Start()
     {
         ClearSelect();
-
-        UIManager.Ins.OpenUI<UI_Ingame>();
     }
 
     public bool SetTowerToBuild(int id)
