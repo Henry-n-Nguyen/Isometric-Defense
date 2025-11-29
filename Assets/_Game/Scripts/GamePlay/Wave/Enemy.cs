@@ -20,16 +20,29 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int attack = 1;
     [SerializeField] private float speed = 10f;
     [SerializeField] private int moneyDrop = 10;
+    [Space(0.5f)]
+    [SerializeField] private float totalDistanceMoved;
 
     [Header("Resistants")]
+    [Tooltip("Check to enable slow resistant")]
     [SerializeField] private bool slowResistant;
     public bool CanSlow => !slowResistant;
 
+    [Tooltip("Check to enable burn resistant")]
     [SerializeField] private bool burnResistant;
     public bool CanBurn => !burnResistant;
 
+    [Tooltip("Check to enable stun resistant")]
+    [SerializeField] private bool stunResistant;
+    public bool CanStun => !stunResistant;
+
+    [Tooltip("Check to enable poison resistant")]
+    [SerializeField] private bool poisonResistant;
+    public bool CanPoison => !poisonResistant;
+
     [Header("Status Variables")]
     [SerializeField] private List<StatusEffect> activeEffects = new List<StatusEffect>();
+    [SerializeField] private int poisonStack = 0;
 
     // Move variables
     private Transform target;
@@ -38,19 +51,18 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        hp = baseHp;
-        attack = baseAttack;
-        speed = baseSpeed;
-        moneyDrop = baseMoneyDrop;
-
-        points = Waypoints.points[(int)enemyType];
-        target = points[0];
+        OnInit();
     }
 
     private void Update()
     {
         Vector3 dir = target.position - transform.position;
-        transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
+        Vector3 movementVector = dir.normalized * speed * Time.deltaTime;
+
+        float distanceThisFrame = movementVector.magnitude;
+        totalDistanceMoved += distanceThisFrame;
+
+        transform.Translate(movementVector, Space.World);
     
         if (Vector3.Distance(transform.position, target.position) <= 0.02f)
         {
@@ -61,6 +73,11 @@ public class Enemy : MonoBehaviour
     }
 
     // MOVING
+    public float GetTotalDistanceMoved()
+    {
+        return totalDistanceMoved;
+    }
+
     public virtual void GetNextWaypoint()
     {
         if (waypointIndex >= points.Length - 1)
@@ -80,6 +97,21 @@ public class Enemy : MonoBehaviour
     }
 
     // BEHAVIOUR
+    public virtual void OnInit()
+    {
+        hp = baseHp;
+        attack = baseAttack;
+        speed = baseSpeed;
+        moneyDrop = baseMoneyDrop;
+
+        totalDistanceMoved = 0f;
+
+        poisonStack = 0;
+
+        points = Waypoints.points[(int)enemyType];
+        target = points[0];
+    }
+
     public virtual void Hit(int damage)
     {
         hp -= damage;
@@ -98,6 +130,8 @@ public class Enemy : MonoBehaviour
                                                                                             : LevelManager.Ins.MaxMoney;
 
         WaveManager.Ins.ReduceEnemyNum();
+
+        ReleaseAllStatusEffect();
 
         Destroy(gameObject);
     }
@@ -121,6 +155,28 @@ public class Enemy : MonoBehaviour
                 activeEffects[i].EndEffect();
                 activeEffects.RemoveAt(i);
             }
+        }
+    }
+
+    private void ReleaseAllStatusEffect()
+    {
+        foreach (StatusEffect effect in activeEffects)
+        {
+            effect.EndEffect();
+        }
+
+        activeEffects.Clear();
+    }
+
+    public void OnPoisoned()
+    {
+        poisonStack++;
+
+        if (poisonStack >= 2)
+        {
+            Hit(1);
+
+            poisonStack = 0;
         }
     }
 

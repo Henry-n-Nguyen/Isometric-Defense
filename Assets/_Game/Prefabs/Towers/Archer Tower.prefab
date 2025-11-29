@@ -208,12 +208,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc3fef63327694b449cc0cdf98f05909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firePoint: {fileID: 4375417884782005435}
+  partToRotate: {fileID: 2266782925383051092}
+  damage: 1
+  fireRate: 1
+  useLaser: 0
+  lineRenderer: {fileID: 0}
+  bulletPrefab: {fileID: 1328361441154314570, guid: 160e57c680b5b06448bc3d0c0591d2ef, type: 3}
+  applySlow: 0
+  applyBurn: 0
+  applyStun: 0
+  applyPoison: 0
+  targetPriority: 0
   targetList: []
   target: {fileID: 0}
-  partToRotate: {fileID: 2266782925383051092}
-  fireRate: 1
-  bulletPrefab: {fileID: 1328361441154314570, guid: 160e57c680b5b06448bc3d0c0591d2ef, type: 3}
-  firePoint: {fileID: 4375417884782005435}
 --- !u!1 &7307232630904854894
 GameObject:
   m_ObjectHideFlags: 0

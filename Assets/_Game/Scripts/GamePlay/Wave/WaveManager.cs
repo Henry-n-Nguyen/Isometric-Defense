@@ -16,7 +16,7 @@ public class WaveManager : Singleton<WaveManager>
     [SerializeField] private Transform enemyHolder;
 
     [Header("Timing")]
-    [SerializeField] private float timeBetweenEachSpawn = 0.5f;
+    [SerializeField] private float timeBetweenEachSpawn = 0.75f;
     [SerializeField] private float countdown = 2f;
 
     private int waveIndex = 0;

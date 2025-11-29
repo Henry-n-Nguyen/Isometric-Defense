@@ -684,7 +684,7 @@ MonoBehaviour:
   enemyNum: 0
   spawnPoint: {fileID: 2446762790670451816}
   enemyHolder: {fileID: 8211271079839801955}
-  timeBetweenEachSpawn: 0.5
+  timeBetweenEachSpawn: 0.75
   countdown: 2
 --- !u!1 &5324706220032521980
 GameObject:
