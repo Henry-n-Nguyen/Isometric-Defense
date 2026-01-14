@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class UICanvas : MonoBehaviour
 {
-    protected bool destroyOnClose;
+   public bool destroyOnClose;
 
     private void Awake()
     {

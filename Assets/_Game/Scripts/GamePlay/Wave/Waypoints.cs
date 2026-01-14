@@ -6,7 +6,7 @@ public class Waypoints : MonoBehaviour
     [Header("Transform")]
     [SerializeField] private List<Transform> wayPoints = new List<Transform>();
 
-    public static List<Transform[]> points = new List<Transform[]>();
+    public List<Transform[]> points = new List<Transform[]>();
 
     private void Awake()
     {

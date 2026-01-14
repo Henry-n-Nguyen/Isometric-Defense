@@ -7,6 +7,8 @@ public class WaveManager : Singleton<WaveManager>
 {
     public event Action OnInvasionEnd;
 
+    public Waypoints waypoints;
+
     [SerializeField] private List<Wave> waves = new List<Wave>();
     [SerializeField] private int enemyNum;
 
@@ -20,6 +22,12 @@ public class WaveManager : Singleton<WaveManager>
     [SerializeField] private float countdown = 2f;
 
     private int waveIndex = 0;
+
+    void Start()
+    {
+        waveIndex = 0;
+        enemyNum = 0;
+    }
 
     void Update()
     {

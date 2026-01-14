@@ -11,7 +11,7 @@
                 if (ins == null)
                 {
                     // Find singleton
-                    ins = FindObjectOfType<T>();
+                    ins = FindFirstObjectByType<T>();
 
                     // Create new instance if one doesn't already exist.
                     if (ins == null)

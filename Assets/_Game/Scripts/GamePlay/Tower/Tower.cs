@@ -161,7 +161,7 @@ public class Tower : MonoBehaviour
 
         if (applyStun && enemy.CanStun)
         {
-            enemy.ApplyStatusEffect(new StatusEffect_Stun(1, enemy));
+            enemy.ApplyStatusEffect(new StatusEffect_Stun(0.5f, enemy));
         }
 
         if (applyPoison && enemy.CanPoison)

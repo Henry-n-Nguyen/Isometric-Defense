@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -5285359862822394727}
   - component: {fileID: 3715576317262020384}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Blue Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f2728ae8e64279c448dd84d9d4d74a2a, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -171,8 +171,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a181662e007f3714081f3429c91c4b6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
-  baseHp: 3
-  baseAttack: 1
-  baseSpeed: 0.5
-  baseMoneyDrop: 10
+  enemyType: 0
+  baseHp: 5
+  baseAttack: 2
+  baseSpeed: 0.4
+  baseMoneyDrop: 15
+  hp: 1
+  attack: 1
+  speed: 10
+  moneyDrop: 10
+  slowResistant: 1
+  burnResistant: 0

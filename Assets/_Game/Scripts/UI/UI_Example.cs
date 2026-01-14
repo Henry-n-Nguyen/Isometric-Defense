@@ -1,6 +1,3 @@
-using UnityEngine;
-using UnityEngine.UI;
-
 public class UI_Example : UICanvas
 {
     private void Update()

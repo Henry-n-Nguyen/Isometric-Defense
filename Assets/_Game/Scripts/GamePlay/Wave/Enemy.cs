@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class Enemy : MonoBehaviour
 {
-    public event Action OnDeath;
+    //public event Action OnDeath;
 
     [SerializeField] private EnvironmentId enemyType;
 
@@ -42,6 +42,7 @@ public class Enemy : MonoBehaviour
 
     [Header("Status Variables")]
     [SerializeField] private List<StatusEffect> activeEffects = new List<StatusEffect>();
+    [SerializeField] private StatusEffect[] effects;
     [SerializeField] private int poisonStack = 0;
 
     // Move variables
@@ -49,13 +50,18 @@ public class Enemy : MonoBehaviour
     private int waypointIndex = 0;
     private Transform[] points;
 
-    private void Start()
+    private bool isInitialized;
+
+    private void Awake()
     {
+        isInitialized = false;
         OnInit();
     }
 
     private void Update()
     {
+        if (!isInitialized) return;
+
         Vector3 dir = target.position - transform.position;
         Vector3 movementVector = dir.normalized * speed * Time.deltaTime;
 
@@ -108,8 +114,10 @@ public class Enemy : MonoBehaviour
 
         poisonStack = 0;
 
-        points = Waypoints.points[(int)enemyType];
+        points = WaveManager.Ins.waypoints.points[(int)enemyType];
         target = points[0];
+
+        isInitialized = true;
     }
 
     public virtual void Hit(int damage)
@@ -148,14 +156,12 @@ public class Enemy : MonoBehaviour
         // if no status effect active, return
         if (activeEffects.Count == 0) return;
 
-        for (int i = activeEffects.Count - 1; i >= 0; i--)
+        activeEffects.RemoveAll(effect =>
         {
-            if (activeEffects[i].UpdateEffect())
-            {
-                activeEffects[i].EndEffect();
-                activeEffects.RemoveAt(i);
-            }
-        }
+            bool shoudRemove = effect.UpdateEffect();
+            if (shoudRemove) effect.EndEffect();
+            return shoudRemove;
+        });
     }
 
     private void ReleaseAllStatusEffect()
@@ -174,7 +180,7 @@ public class Enemy : MonoBehaviour
 
         if (poisonStack >= 2)
         {
-            Hit(1);
+            Hit(2);
 
             poisonStack = 0;
         }

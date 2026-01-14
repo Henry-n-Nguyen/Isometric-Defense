@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -5285359862822394727}
   - component: {fileID: 3715576317262020384}
   m_Layer: 0
-  m_Name: Hell Enemy
+  m_Name: Red Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -3,11 +3,9 @@ using UnityEngine;
 
 public class LevelManager : Singleton<LevelManager>
 {
-    [Header("Stats")]
-    public PlayerStats PlayerStats;
-
     public event Action OnTowerDeployed;
     public event Action OnEnemyInvaded;
+    public event Action OnEndLevel;
 
     [Space(0.5f)]
     [Header("Ingame Statitics")]
@@ -18,17 +16,18 @@ public class LevelManager : Singleton<LevelManager>
     
     public bool IsWinLevel;
 
+    // private
     private float timer;
 
     private void Awake()
     {
         IsWinLevel = false;
 
-        Money = PlayerStats.StartMoney;
-        MaxMoney = PlayerStats.StartMaxReach;
-        Profit = PlayerStats.StartProfit;
+        Money = CoreManager.Ins.PlayerStats.StartMoney;
+        MaxMoney = CoreManager.Ins.PlayerStats.StartMaxReach;
+        Profit = CoreManager.Ins.PlayerStats.StartProfit;
 
-        Lives = PlayerStats.StartLives;
+        Lives = CoreManager.Ins.PlayerStats.StartLives;
 
         WaveManager.Ins.OnInvasionEnd += OnLevelEnd;
     }
@@ -73,12 +72,14 @@ public class LevelManager : Singleton<LevelManager>
     {
         WaveManager.Ins.OnInvasionEnd -= OnLevelEnd;
 
-        if (IsWinLevel)
-        {
-            Debug.Log("You Win :))))");
-            return;
-        }
+        OnEndLevel?.Invoke();
 
-        Debug.Log("You Lose!!!");
+        //if (IsWinLevel)
+        //{
+        //    Debug.Log("You Win :))))");
+        //    return;
+        //}
+
+        //Debug.Log("You Lose!!!");
     }
 }
